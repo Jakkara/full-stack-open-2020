@@ -5,7 +5,6 @@ class Part extends Component {
     return (
       <p>{this.props.partName + " - " + this.props.partExerciseAmount}</p>
     )
-
   }
 }
 

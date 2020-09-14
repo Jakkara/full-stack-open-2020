@@ -3,9 +3,9 @@ import Part from './Part'
 
 class Content extends Component {
   render() {
-    return this.props.courseParts.map((value, index) => {
+    return this.props.courseParts.map(value => {
       return (
-        <Part partName={value[0]} partExerciseAmount={value[1]} />
+        <Part partName={value.name} partExerciseAmount={value.exercises} />
       )
     })
   }
