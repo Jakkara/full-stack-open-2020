@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
+import Part from './Part'
 
 class Content extends Component {
   render() {
-    return (
-      <div>
-        <p>{this.props.name + " - " + this.props.exercises}</p>
-      </div>
-    )
+    return this.props.courseExerciseMap.map((value, index) => {
+      return (
+        <Part partName={value[0]} partExerciseAmount={value[1]} />
+      )
+    })
   }
 }
 

@@ -13,12 +13,16 @@ const App = () => {
   const part3 = 'Komponenttien tila'
   const exercises3 = 14
 
+  const courseExerciseMap = [
+    [part1, exercises1],
+    [part2, exercises2],
+    [part3, exercises3]
+  ]
+
   return (
     <div>
       <Header course={course} />
-      <Content name={part1} exercises={exercises1} />
-      <Content name={part2} exercises={exercises2} />
-      <Content name={part3} exercises={exercises3} />
+      <Content courseExerciseMap={courseExerciseMap} />
       <Total allExercises={[exercises1, exercises2, exercises3]} />
     </div>
   )
