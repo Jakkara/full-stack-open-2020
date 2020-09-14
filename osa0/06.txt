@@ -1,0 +1,21 @@
+title Muistiinpanon luonti SPA-sivulla
+
+note left of selain: 
+JS on kiinnittänyt sivunlatauksella 
+event listenerin muistiinpanon luontilomakkeeseen.
+end note
+
+note over selain: 
+Käyttäjä kirjoittaa muistiinpanon ja painaa Save
+end note
+
+note over selain:
+Event listener ottaa lähetetyn muistiinpanon,
+lisää sen selaimen paikalliseen kopioon muistiinpanoista,
+piirtää muistiinpanolistan uudestaan ja lähettää 
+luodun muistiinpanon palvelimelle.
+end note
+
+selain->palvelin: HTTP POST /new_note_spa
+palvelin->selain: HTTP 201 Created
+

@@ -7,15 +7,15 @@ end note
 Selain->Palvelin: HTTP POST /new_note
 
 note over Palvelin:
-Vastaanotetun sanoman sisällön purku ja validointi
+Vastaanotetun sanoman sisällön purku ja validointi.
 end note
 
 note over Palvelin:
-Uuden muistiinpanon talletus palvelimen kantaan
+Uuden muistiinpanon talletus palvelimelle.
 end note
 
 note over Palvelin:
-Käyttäjän ohjaus takaisin etusivulle
+Käyttäjän ohjaus takaisin etusivulle.
 end note
 
 Palvelin->Selain: HTTP 302 /
