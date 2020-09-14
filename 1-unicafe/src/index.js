@@ -17,6 +17,14 @@ const Statistics = ({ reviews }) => {
     positiveReviews = good / total || "0",
     averageScore = (good - bad) / total || "0"
 
+
+  if (total === 0) {
+    return (
+      <>
+        <p>No reviews yet</p>
+      </>
+    )
+  }
   return (
     <ul>
       <li>Good: {good}</li>
