@@ -3,7 +3,7 @@ import Part from './Part'
 
 class Content extends Component {
   render() {
-    return this.props.courseParts.map(value => {
+    return this.props.parts.map(value => {
       return (
         <Part partName={value.name} partExerciseAmount={value.exercises} />
       )
