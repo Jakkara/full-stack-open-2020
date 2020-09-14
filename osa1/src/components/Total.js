@@ -1,22 +1,22 @@
-import React, { Component } from 'react'
+import React from 'react'
 
-class Total extends Component {
+const Total = props => {
+  const { parts } = props
 
-  render() {
-    return (
-      <div className="total-courses">
-        <p>Total # of courses: {totalExercises(this.props.parts)}</p>
-      </div>
-    )
+  const totalExercises = parts => {
+    let sum = 0
+    parts.forEach(value => {
+      sum += value.exercises
+    })
+    return sum
   }
+
+  return (
+    <div className="total-courses">
+      <p>Total # of courses: {totalExercises(parts)}</p>
+    </div>
+  )
 }
 
-const totalExercises = parts => {
-  let sum = 0
-  parts.forEach(value => {
-    sum += value.exercises
-  })
-  return sum
-}
 
 export default Total 

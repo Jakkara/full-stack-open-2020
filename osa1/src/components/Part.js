@@ -1,11 +1,10 @@
-import React, { Component } from 'react'
+import React from 'react'
 
-class Part extends Component {
-  render() {
-    return (
-      <p>{this.props.partName + " - " + this.props.partExerciseAmount}</p>
-    )
-  }
+const Part = props => {
+  const { partName, partExerciseAmount } = props
+  return (
+    <p>{partName + " - " + partExerciseAmount}</p>
+  )
 }
 
 export default Part 
