@@ -1,0 +1,21 @@
+title Muistiinpanon luonti
+
+note over Selain:
+Save-napin painallus
+end note
+
+Selain->Palvelin: HTTP POST /new_note
+
+note over Palvelin:
+Vastaanotetun sanoman sisällön purku ja validointi
+end note
+
+note over Palvelin:
+Uuden muistiinpanon talletus palvelimen kantaan
+end note
+
+note over Palvelin:
+Käyttäjän ohjaus takaisin etusivulle
+end note
+
+Palvelin->Selain: HTTP 302 /
