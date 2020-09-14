@@ -9,13 +9,34 @@ const Button = ({ handleClick, label }) => {
   )
 }
 
+const Statistics = ({ reviews }) => {
+  const good = reviews.good,
+    bad = reviews.bad,
+    neutral = reviews.neutral,
+    total = good + bad + neutral,
+    positiveReviews = good / total || "0",
+    averageScore = (good - bad) / total || "0"
+
+  return (
+    <ul>
+      <li>Good: {good}</li>
+      <li>Neutral: {neutral}</li>
+      <li>Bad: {bad}</li>
+      <li>Total reviews: {total}</li>
+      <li>Average review score: {averageScore}</li>
+      <li> % of positive reviews: {positiveReviews * 100} %</li>
+    </ul>
+
+  )
+}
+
 const App = () => {
   // tallenna napit omaan tilaansa
   const [good, setGood] = useState(0)
   const [neutral, setNeutral] = useState(0)
   const [bad, setBad] = useState(0)
 
-
+  const allReviews = {good, bad, neutral}
 
   return (
     <div>
@@ -25,9 +46,7 @@ const App = () => {
       <Button handleClick={() => setNeutral(neutral + 1)} label="neutral" />
       <Button handleClick={() => setBad(bad + 1)} label="bad" />
       <h2>Customer Reviews</h2>
-      <p>Good : {good}</p>
-      <p>Neutral : {neutral}</p>
-      <p>Bad : {bad}</p>
+      <Statistics reviews={allReviews} />
     </div>
   )
 
