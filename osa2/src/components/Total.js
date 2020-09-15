@@ -1,19 +1,14 @@
 import React from 'react'
 
-const Total = props => {
-  const { parts } = props
+const Total = ({ parts }) => {
 
-  const totalExercises = parts => {
-    let sum = 0
-    parts.forEach(value => {
-      sum += value.exercises
-    })
-    return sum
-  }
+  const reducer = (accumulator, current) => accumulator + current.exercises
+
+  const total = parts.reduce(reducer, 0)
 
   return (
     <div className="total-courses">
-      <p>Total # of courses: {totalExercises(parts)}</p>
+      <p>Total # of courses: {total}</p>
     </div>
   )
 }
