@@ -1,7 +1,6 @@
 import React from 'react'
 
-const Header = props => {
-  const { title } = props
+const Header = ({ title }) => {
 
   return (
     <div className="page-header">
