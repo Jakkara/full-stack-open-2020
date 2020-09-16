@@ -12,6 +12,7 @@ const App = () => {
   const [newNumber, setNewNumber] = useState('')
   const [nameFilter, setNameFilter] = useState('')
   const [notificationMessage, setNotificationMessage] = useState('')
+  const [errorMessage, setErrorMessage] = useState('')
 
   useEffect(() => {
     noteService
@@ -24,6 +25,11 @@ const App = () => {
   const showTimedMessage = (message, timeout) => {
     setNotificationMessage(message)
     setTimeout(() => setNotificationMessage(null), timeout)
+  }
+
+  const showTimedErrorMessage = (message, timeout) => {
+    setErrorMessage(message)
+    setTimeout(() => setErrorMessage(null), timeout)
   }
 
   const handleNameChange = event => {
@@ -86,8 +92,13 @@ const App = () => {
       noteService
         .destroy(targetId)
         .then(() => {
-          setPersons(filteredPersons)
           showTimedMessage(`Removed ${selectedPerson.name}`, 2000)
+        })
+        .catch(error => {
+          showTimedErrorMessage(`${selectedPerson.name} was already removed.`, 2000)
+        })
+        .then(() => {
+          setPersons(filteredPersons)
         })
     }
   }
@@ -102,6 +113,9 @@ const App = () => {
     <div>
       {notificationMessage ? (
         <Notification message={notificationMessage} className="success" />
+      ) : ''}
+      {errorMessage ? (
+        <Notification message={errorMessage} className="error" />
       ) : ''}
       <h2>Phonebook</h2>
       <form onSubmit={handleFormSubmit}>
