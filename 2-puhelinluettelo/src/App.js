@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import PersonForm from './components/PersonForm'
 import Filter from './components/Filter'
 import Persons from './components/Persons'
+import Notification from './components/Notification'
 import noteService from './services/persons'
 
 const App = () => {
@@ -10,6 +11,7 @@ const App = () => {
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
   const [nameFilter, setNameFilter] = useState('')
+  const [notificationMessage, setNotificationMessage] = useState('')
 
   useEffect(() => {
     noteService
@@ -18,6 +20,11 @@ const App = () => {
         setPersons(persons)
       })
   }, [])
+
+  const showTimedMessage = (message, timeout) => {
+    setNotificationMessage(message)
+    setTimeout(() => setNotificationMessage(null), timeout)
+  }
 
   const handleNameChange = event => {
     setNewName(event.target.value)
@@ -50,6 +57,7 @@ const App = () => {
         .update(matchingPerson.id, updateInfo)
         .then(updatedPerson => {
           setPersons(persons.map(person => person.id === updatedPerson.id ? updatedPerson : person))
+          showTimedMessage(`Updated ${matchingPerson.name}`, 2000)
         })
 
     } else {
@@ -62,6 +70,7 @@ const App = () => {
         .create(newPerson)
         .then(createdPerson => {
           setPersons(persons.concat(createdPerson))
+          showTimedMessage(`Added ${newPerson.name}`, 2000)
         })
     }
     setNewName('')
@@ -78,6 +87,7 @@ const App = () => {
         .destroy(targetId)
         .then(() => {
           setPersons(filteredPersons)
+          showTimedMessage(`Removed ${selectedPerson.name}`, 2000)
         })
     }
   }
@@ -90,6 +100,9 @@ const App = () => {
 
   return (
     <div>
+      {notificationMessage ? (
+        <Notification message={notificationMessage} className="success" />
+      ) : ''}
       <h2>Phonebook</h2>
       <form onSubmit={handleFormSubmit}>
         <h3>Add a new entry</h3>
