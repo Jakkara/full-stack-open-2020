@@ -34,24 +34,38 @@ const App = () => {
   const handleFormSubmit = event => {
     event.preventDefault()
 
-    const matchingNames = persons.filter(person => person.name === newName)
-    if (matchingNames.length > 0) {
-      alert(`${newName} is already in the phone book!`)
-      return false
-    }
+    const matchingPerson = persons.find(person => person.name === newName)
+    if (matchingPerson) {
+      const result = window.confirm(
+        `${newName} is already added to the phonebook. Would you like to replace their number with a new one?`
+      )
+      if (!result) {
+        return false
+      }
+      const updateInfo = {
+        ...matchingPerson,
+        number: newNumber
+      }
+      noteService
+        .update(matchingPerson.id, updateInfo)
+        .then(updatedPerson => {
+          setPersons(persons.map(person => person.id === updatedPerson.id ? updatedPerson : person))
+        })
 
-    const newPerson = {
-      name: newName,
-      number: newNumber
-    }
+    } else {
+      const newPerson = {
+        name: newName,
+        number: newNumber
+      }
 
-    noteService
-      .create(newPerson)
-      .then(createdPerson => {
-        setPersons(persons.concat(createdPerson))
-        setNewName('')
-        setNewNumber('')
-      })
+      noteService
+        .create(newPerson)
+        .then(createdPerson => {
+          setPersons(persons.concat(createdPerson))
+        })
+    }
+    setNewName('')
+    setNewNumber('')
   }
 
   const handlePersonDelete = event => {
