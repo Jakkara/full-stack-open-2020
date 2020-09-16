@@ -54,6 +54,20 @@ const App = () => {
       })
   }
 
+  const handlePersonDelete = event => {
+    const targetId = parseInt(event.target.dataset.id)
+    const selectedPerson = persons.find(person => person.id === targetId)
+    const result = window.confirm(`Are you sure you want to remove ${selectedPerson.name}?`)
+    if (result) {
+      const filteredPersons = persons.filter(person => person.id !== targetId)
+      noteService
+        .destroy(targetId)
+        .then(() => {
+          setPersons(filteredPersons)
+        })
+    }
+  }
+
   const peopleToShow = nameFilter === '' ? persons : persons.filter(person => {
     const nameInLower = person.name.toLowerCase(),
       queryInLower = nameFilter.toLowerCase()
@@ -75,7 +89,7 @@ const App = () => {
       </form>
       <h3>Numbers</h3>
       <Filter value={nameFilter} onChange={handleFilterChange} />
-      <Persons people={peopleToShow} />
+      <Persons people={peopleToShow} onDelete={handlePersonDelete} />
     </div>
   )
 
