@@ -78,6 +78,9 @@ const App = () => {
           setPersons(persons.concat(createdPerson))
           showTimedMessage(`Added ${newPerson.name}`, 2000)
         })
+        .catch(e => {
+          showTimedErrorMessage(e.response.data.error, 4000)
+        })
     }
     setNewName('')
     setNewNumber('')
@@ -95,7 +98,7 @@ const App = () => {
           showTimedMessage(`Removed ${selectedPerson.name}`, 2000)
         })
         .catch(error => {
-          showTimedErrorMessage(`${selectedPerson.name} was already removed.`, 2000)
+          showTimedErrorMessage(`${selectedPerson.name} was already removed.`, 4000)
         })
         .then(() => {
           setPersons(filteredPersons)
