@@ -4,7 +4,7 @@ import PersonForm from './components/PersonForm'
 import Filter from './components/Filter'
 import Persons from './components/Persons'
 import Notification from './components/Notification'
-import noteService from './services/persons'
+import personService from './services/persons'
 
 const App = () => {
   const [persons, setPersons] = useState([])
@@ -15,7 +15,7 @@ const App = () => {
   const [errorMessage, setErrorMessage] = useState('')
 
   useEffect(() => {
-    noteService
+    personService
       .getAll()
       .then(persons => {
         setPersons(persons)
@@ -59,7 +59,7 @@ const App = () => {
         ...matchingPerson,
         number: newNumber
       }
-      noteService
+      personService
         .update(matchingPerson.id, updateInfo)
         .then(updatedPerson => {
           setPersons(persons.map(person => person.id === updatedPerson.id ? updatedPerson : person))
@@ -72,7 +72,7 @@ const App = () => {
         number: newNumber
       }
 
-      noteService
+      personService
         .create(newPerson)
         .then(createdPerson => {
           setPersons(persons.concat(createdPerson))
@@ -89,7 +89,7 @@ const App = () => {
     const result = window.confirm(`Are you sure you want to remove ${selectedPerson.name}?`)
     if (result) {
       const filteredPersons = persons.filter(person => person.id !== targetId)
-      noteService
+      personService
         .destroy(targetId)
         .then(() => {
           showTimedMessage(`Removed ${selectedPerson.name}`, 2000)
