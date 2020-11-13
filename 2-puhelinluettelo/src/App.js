@@ -84,7 +84,7 @@ const App = () => {
   }
 
   const handlePersonDelete = event => {
-    const targetId = parseInt(event.target.dataset.id)
+    const targetId = event.target.dataset.id
     const selectedPerson = persons.find(person => person.id === targetId)
     const result = window.confirm(`Are you sure you want to remove ${selectedPerson.name}?`)
     if (result) {
